@@ -1,0 +1,39 @@
+{
+  "name": "storycap-cli",
+  "version": "0.1.0",
+  "description": "CLI for capturing Storybook screenshots via storycap-testrun",
+  "type": "module",
+  "bin": {
+    "storycap-cli": "./dist/bin.mjs"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@storycap-testrun/browser": "^2.0.0",
+    "citty": "^0.1.0"
+  },
+  "peerDependencies": {
+    "@storybook/addon-vitest": ">=8.0.0",
+    "vitest": ">=3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.2",
+    "@vitest/browser": "^3.2.4",
+    "tsdown": "0.21.0-beta.2",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}

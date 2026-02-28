@@ -113,7 +113,11 @@ export async function run(options: CliOptions): Promise<void> {
     ``,
     `export default config;`,
   );
-  fs.writeFileSync(tempConfigPath, configLines.join('\n'));
+  const configContent = configLines.join('\n');
+  if (options.debug) {
+    console.log('[storycap] wrapper config:\n' + configContent);
+  }
+  fs.writeFileSync(tempConfigPath, configContent);
 
   try {
     const vitest = await startVitest(

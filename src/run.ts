@@ -2,7 +2,6 @@ import { createRequire } from 'node:module';
 import fs from 'node:fs';
 import path from 'node:path';
 import type { CliOptions } from './cli.js';
-import { parseStoryPatterns } from './filter.js';
 import { StorycapReporter } from './reporter.js';
 
 const require = createRequire(import.meta.url);
@@ -15,7 +14,7 @@ export async function run(options: CliOptions): Promise<void> {
   const vitestNodePath = projectRequire.resolve('vitest/node');
   const { startVitest } = (await import(vitestNodePath)) as typeof import('vitest/node');
 
-  const { fileFilters, testNamePattern } = parseStoryPatterns(options.include, options.exclude);
+  const { fileFilters, testNamePattern } = options;
 
   // Resolve @storycap-testrun/browser ESM entry from storycap-cli's node_modules
   const browserPkgDir = path.dirname(
@@ -130,7 +129,8 @@ export async function run(options: CliOptions): Promise<void> {
           ? ['default', new StorycapReporter({ dryRun: options.dryRun })]
           : [new StorycapReporter({ dryRun: options.dryRun })],
         ...(options.project ? { project: [options.project] } : {}),
-        ...(testNamePattern ? { testNamePattern } : {}),
+        ...(testNamePattern ? { testNamePattern: new RegExp(testNamePattern) } : {}),
+        ...(options.exclude.length > 0 ? { exclude: options.exclude } : {}),
       },
       {
         server: {

@@ -1,8 +1,9 @@
-import { defineCommand } from 'citty';
+import cac from 'cac';
 import { run } from './run.js';
 
 export type CliOptions = {
-  include: string[];
+  fileFilters: string[];
+  testNamePattern: string | undefined;
   exclude: string[];
   outDir: string;
   project: string | undefined;
@@ -11,63 +12,33 @@ export type CliOptions = {
   debug: boolean;
 };
 
-export const main = defineCommand({
-  meta: {
-    name: 'storycap-cli',
-    version: '0.1.0',
-    description:
-      'Capture Storybook screenshots via storycap-testrun',
-  },
-  args: {
-    include: {
-      type: 'string',
-      alias: 'i',
-      description:
-        'Include stories matching patterns (comma-separated, e.g. "Button/*,Card/Primary")',
-    },
-    exclude: {
-      type: 'string',
-      alias: 'e',
-      description:
-        'Exclude stories matching patterns (comma-separated)',
-    },
-    outDir: {
-      type: 'string',
-      alias: 'o',
-      description: 'Output directory',
-      default: '__screenshots__',
-    },
-    project: {
-      type: 'string',
-      description:
-        'Vitest project name to run (e.g. "storybook"). Required if vitest config uses projects.',
-    },
-    dryRun: {
-      type: 'boolean',
-      description: 'List matched stories without capturing',
-      default: false,
-    },
-    headed: {
-      type: 'boolean',
-      description: 'Run browser in headed mode',
-      default: false,
-    },
-    debug: {
-      type: 'boolean',
-      description: 'Show debug output',
-      default: false,
-    },
-  },
-  async run({ args }) {
-    const options: CliOptions = {
-      include: args.include ? args.include.split(',') : [],
-      exclude: args.exclude ? args.exclude.split(',') : [],
-      outDir: args.outDir,
-      project: args.project,
-      dryRun: args.dryRun,
-      headed: args.headed,
-      debug: args.debug,
-    };
-    await run(options);
-  },
-});
+export function setupCli(argv: string[]): void {
+  const cli = cac('storycap-cli');
+
+  cli
+    .command('[...filters]', 'Capture Storybook screenshots via storycap-testrun')
+    .option('-t, --testNamePattern <pattern>', 'Regex pattern to filter test names')
+    .option('--exclude <glob>', 'Exclude files matching glob pattern', { type: [] })
+    .option('-o, --outDir <dir>', 'Output directory', { default: '__screenshots__' })
+    .option('--project <name>', 'Vitest project name to run (e.g. "storybook")')
+    .option('--dryRun', 'List matched stories without capturing', { default: false })
+    .option('--headed', 'Run browser in headed mode', { default: false })
+    .option('--debug', 'Show debug output', { default: false })
+    .action(async (filters: string[], options) => {
+      const cliOptions: CliOptions = {
+        fileFilters: filters,
+        testNamePattern: options.testNamePattern,
+        exclude: options.exclude ?? [],
+        outDir: options.outDir,
+        project: options.project,
+        dryRun: options.dryRun,
+        headed: options.headed,
+        debug: options.debug,
+      };
+      await run(cliOptions);
+    });
+
+  cli.help();
+  cli.version('0.1.0');
+  cli.parse(argv);
+}

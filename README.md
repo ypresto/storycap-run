@@ -38,21 +38,26 @@ Peer dependencies:
 
 ## Usage
 
+Filtering works the same as vitest: positional args for file path matching, `-t` for test name regex.
+
 ```bash
 # Capture all stories
 npx storycap-cli
 
-# Capture specific stories by pattern
-npx storycap-cli --include "Button/*"
+# Filter by file path (substring match, like vitest)
+npx storycap-cli Button
 
-# Capture multiple patterns
-npx storycap-cli --include "Button/*,Card/Primary"
+# Multiple file filters (space-separated, like vitest)
+npx storycap-cli Button Card
 
-# Exclude specific stories
-npx storycap-cli --exclude "Button/Disabled"
+# Filter by test name regex (like vitest -t)
+npx storycap-cli -t "Primary|Secondary"
 
-# Combine include and exclude
-npx storycap-cli --include "Button/*" --exclude "Button/Disabled"
+# Combine file filter and test name filter
+npx storycap-cli Button -t "Primary"
+
+# Exclude files by glob pattern (like vitest --exclude)
+npx storycap-cli --exclude "**/*.integration.stories.*"
 
 # List matched stories without capturing
 npx storycap-cli --dryRun
@@ -76,26 +81,14 @@ Screenshots are saved to `__screenshots__/` by default, organized by story file 
 
 | Option | Alias | Description | Default |
 |--------|-------|-------------|---------|
-| `--include <patterns>` | `-i` | Include stories matching patterns (comma-separated) | all stories |
-| `--exclude <patterns>` | `-e` | Exclude stories matching patterns (comma-separated) | none |
+| `[...filters]` | | File path patterns (positional, space-separated) | all stories |
+| `--testNamePattern` | `-t` | Regex pattern to filter test names | |
+| `--exclude <glob>` | | Exclude files matching glob pattern (repeatable) | |
 | `--outDir <dir>` | `-o` | Output directory | `__screenshots__` |
 | `--project <name>` | | Vitest project name to run (e.g. `storybook`) | |
 | `--dryRun` | | List matched stories without capturing | `false` |
 | `--headed` | | Run browser in headed (visible) mode | `false` |
 | `--debug` | | Show vitest's default reporter output | `false` |
-
-## Pattern format
-
-Patterns use the format `Title/Name` where `*` is a wildcard:
-
-- `Button/*` — all stories under the "Button" title
-- `Button/Primary` — the exact "Primary" story of "Button"
-- `Components/Button/*` — nested title matching
-- `*/*` — all stories
-
-The title part matches against file paths (substring match), and the name part matches against test names (story export names like `Primary`, `Default`).
-
-> **Note:** `--exclude` applies name-based filtering via regex negative lookahead. File-level exclusion by title is not supported.
 
 ## How it works
 

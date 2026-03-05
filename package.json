@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@storycap-testrun/browser": "^2.0.0",
-    "citty": "^0.1.0"
+    "cac": "^7.0.0"
   },
   "peerDependencies": {
     "@storybook/addon-vitest": ">=8.0.0",

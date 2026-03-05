@@ -1,4 +1,3 @@
-import { runMain } from 'citty';
-import { main } from './cli.js';
+import { setupCli } from './cli.js';
 
-runMain(main);
+setupCli(process.argv);

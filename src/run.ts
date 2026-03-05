@@ -104,6 +104,9 @@ export async function run(options: CliOptions): Promise<void> {
   }
   configLines.push(
     `      project.test.browser.viewport = { width: ${options.viewport.width}, height: ${options.viewport.height} };`,
+    `      if (!project.test.browser.providerOptions) project.test.browser.providerOptions = {};`,
+    `      if (!project.test.browser.providerOptions.context) project.test.browser.providerOptions.context = {};`,
+    `      if (!project.test.browser.providerOptions.context.deviceScaleFactor) project.test.browser.providerOptions.context.deviceScaleFactor = 2;`,
   );
   if (options.headed) {
     configLines.push(`      project.test.browser.headless = false;`);

@@ -2,18 +2,14 @@
   "name": "storycap-cli",
   "version": "0.1.0",
   "description": "CLI for capturing Storybook screenshots via storycap-testrun",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "storycap-cli": "./dist/bin.mjs"
   },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs"
-    }
-  },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsdown",

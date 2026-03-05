@@ -38,6 +38,14 @@ Peer dependencies:
 
 ## Usage
 
+```bash
+# npm
+npx storycap-cli
+
+# pnpm
+pnpm dlx storycap-cli
+```
+
 Filtering works the same as vitest: positional args for file path matching, `-t` for test name regex.
 
 ```bash

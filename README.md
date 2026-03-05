@@ -71,6 +71,9 @@ npx storycap-cli --project storybook
 # Run with browser visible
 npx storycap-cli --headed
 
+# Custom viewport size (default: 1280x800)
+npx storycap-cli --viewport 1920x1080
+
 # Show vitest's default reporter output
 npx storycap-cli --debug
 ```
@@ -87,6 +90,7 @@ Screenshots are saved to `__screenshots__/` by default, organized by story file 
 | `--testNamePattern` | `-t` | Regex pattern to filter test names | |
 | `--exclude <glob>` | | Exclude files matching glob pattern (repeatable) | |
 | `--outDir <dir>` | `-o` | Output directory | `__screenshots__` |
+| `--viewport <WxH>` | | Browser viewport size (e.g. `1920x1080`) | `1280x800` |
 | `--project <name>` | | Vitest project name to run (e.g. `storybook`) | |
 | `--dryRun` | | List matched stories without capturing | `false` |
 | `--headed` | | Run browser in headed (visible) mode | `false` |

@@ -1,1 +1,1 @@
-export type { CliOptions } from './cli.js';
+export type { CliOptions, Viewport } from './cli.js';

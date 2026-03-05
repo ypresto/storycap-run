@@ -102,6 +102,9 @@ export async function run(options: CliOptions): Promise<void> {
       `      project.test.browser.commands.resolveScreenshotFilepath = resolveScreenshotFilepath;`,
     );
   }
+  configLines.push(
+    `      project.test.browser.viewport = { width: ${options.viewport.width}, height: ${options.viewport.height} };`,
+  );
   if (options.headed) {
     configLines.push(`      project.test.browser.headless = false;`);
   }

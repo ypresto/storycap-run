@@ -33,5 +33,8 @@ export class StorycapReporter implements Reporter {
     console.log(
       `\nDone: ${this.captured} ${label}, ${this.failed} failed (${this.total} total)`,
     );
+    if (this.failed > 0) {
+      process.exitCode = 1;
+    }
   }
 }

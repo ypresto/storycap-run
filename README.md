@@ -77,6 +77,8 @@ npx storycap-cli --debug
 
 Screenshots are saved to `__screenshots__/` by default, organized by story file and story name (e.g. `__screenshots__/Button.stories/Primary.png`).
 
+> **Tip:** `-t` alone filters only by test name — all files are still transformed and loaded (same as vitest). For faster runs, combine with file filters: `storycap-cli Button -t "Primary"`
+
 ## Options
 
 | Option | Alias | Description | Default |

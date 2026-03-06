@@ -31,7 +31,7 @@ export function setupCli(argv: string[]): void {
 
   cli
     .command('[...filters]', 'Capture Storybook screenshots via storycap-testrun')
-    .option('-t, --testNamePattern <pattern>', 'Regex pattern to filter test names')
+    .option('-t, --testNamePattern <pattern>', 'Regex pattern to filter test names (combine with file filters for speed)')
     .option('--exclude <glob>', 'Exclude files matching glob pattern', { type: [] })
     .option('-o, --outDir <dir>', 'Output directory', { default: '__screenshots__' })
     .option('--viewport <size>', 'Viewport size as WIDTHxHEIGHT (e.g. "1280x800")', { default: '1280x800' })

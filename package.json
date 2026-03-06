@@ -4,6 +4,13 @@
   "description": "CLI for capturing Storybook screenshots via storycap-testrun",
   "license": "MIT",
   "type": "module",
+  "keywords": [
+    "storybook",
+    "screenshot",
+    "storycap",
+    "vitest",
+    "visual-testing"
+  ],
   "bin": {
     "storycap-cli": "./dist/bin.mjs"
   },
@@ -15,7 +22,8 @@
     "build": "tsdown",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepublishOnly": "tsdown"
   },
   "dependencies": {
     "@storycap-testrun/browser": "^2.0.0",

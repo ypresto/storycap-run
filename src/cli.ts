@@ -27,7 +27,7 @@ export type CliOptions = {
 };
 
 export function setupCli(argv: string[]): void {
-  const cli = cac('storycap-cli');
+  const cli = cac('storycap-run');
 
   cli
     .command('[...filters]', 'Capture Storybook screenshots via storycap-testrun')

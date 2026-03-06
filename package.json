@@ -1,5 +1,5 @@
 {
-  "name": "storycap-cli",
+  "name": "storycap-run",
   "version": "0.1.0",
   "description": "CLI for capturing Storybook screenshots via storycap-testrun",
   "license": "MIT",
@@ -12,7 +12,7 @@
     "visual-testing"
   ],
   "bin": {
-    "storycap-cli": "./dist/bin.mjs"
+    "storycap-run": "./dist/bin.mjs"
   },
   "files": [
     "dist",

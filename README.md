@@ -1,4 +1,4 @@
-# storycap-cli
+# storycap-run
 
 CLI for capturing Storybook screenshots via [storycap-testrun](https://github.com/reg-viz/storycap-testrun).
 
@@ -28,7 +28,7 @@ export default defineConfig({
 ## Install
 
 ```bash
-pnpm add -D storycap-cli
+pnpm add -D storycap-run
 ```
 
 Peer dependencies:
@@ -40,55 +40,55 @@ Peer dependencies:
 
 ```bash
 # npm
-npx storycap-cli
+npx storycap-run
 
 # pnpm
-pnpm dlx storycap-cli
+pnpm dlx storycap-run
 ```
 
 Filtering works the same as vitest: positional args for file path matching, `-t` for test name regex.
 
 ```bash
 # Capture all stories
-npx storycap-cli
+npx storycap-run
 
 # Filter by file path (substring match, like vitest)
-npx storycap-cli Button
+npx storycap-run Button
 
 # Multiple file filters (space-separated, like vitest)
-npx storycap-cli Button Card
+npx storycap-run Button Card
 
 # Filter by test name regex (like vitest -t)
-npx storycap-cli -t "Primary|Secondary"
+npx storycap-run -t "Primary|Secondary"
 
 # Combine file filter and test name filter
-npx storycap-cli Button -t "Primary"
+npx storycap-run Button -t "Primary"
 
 # Exclude files by glob pattern (like vitest --exclude)
-npx storycap-cli --exclude "**/*.integration.stories.*"
+npx storycap-run --exclude "**/*.integration.stories.*"
 
 # List matched stories without capturing
-npx storycap-cli --dryRun
+npx storycap-run --dryRun
 
 # Custom output directory
-npx storycap-cli --outDir ./screenshots
+npx storycap-run --outDir ./screenshots
 
 # Select a specific vitest project
-npx storycap-cli --project storybook
+npx storycap-run --project storybook
 
 # Run with browser visible
-npx storycap-cli --headed
+npx storycap-run --headed
 
 # Custom viewport size (default: 1280x800)
-npx storycap-cli --viewport 1920x1080
+npx storycap-run --viewport 1920x1080
 
 # Show vitest's default reporter output
-npx storycap-cli --debug
+npx storycap-run --debug
 ```
 
 Screenshots are saved to `__screenshots__/` by default, organized by story file and story name (e.g. `__screenshots__/Button.stories/Primary.png`).
 
-> **Tip:** `-t` alone filters only by test name — all files are still transformed and loaded (same as vitest). For faster runs, combine with file filters: `storycap-cli Button -t "Primary"`
+> **Tip:** `-t` alone filters only by test name — all files are still transformed and loaded (same as vitest). For faster runs, combine with file filters: `storycap-run Button -t "Primary"`
 
 ## Options
 

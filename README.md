@@ -4,6 +4,16 @@ CLI for capturing Storybook screenshots via [storycap-testrun](https://github.co
 
 Runs [vitest](https://vitest.dev/) with [@storybook/addon-vitest](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon) under the hood — no manual server or browser startup needed.
 
+## Why?
+
+`@storybook/addon-vitest` runs stories as tests but doesn't capture screenshots. Existing options each have trade-offs:
+
+- **Vitest `toMatchScreenshot`** — assertion-based, requires adding code to each story manually
+- **Chromatic** — powerful visual regression service, but requires an external paid service
+- **storycap (CLI)** — captures screenshots from a running Storybook server URL, but requires a separate server process
+
+storycap-run automatically captures screenshots for **all stories** with zero per-story setup. It reuses your existing `@storybook/addon-vitest` config — no separate Storybook server needed.
+
 ## Prerequisites
 
 Your project must have `@storybook/addon-vitest` configured in `vitest.config.ts`:

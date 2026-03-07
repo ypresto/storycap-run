@@ -40,10 +40,17 @@ export default defineConfig({
 ## Install
 
 ```bash
-pnpm add -D storycap-run
+# npm
+npm install -g storycap-run
+
+# pnpm
+pnpm add -g storycap-run
+
+# yarn
+yarn global add storycap-run
 ```
 
-Peer dependencies:
+Peer dependencies (must be installed in your project):
 
 - `vitest` >= 3.0.0
 - `@storybook/addon-vitest` >= 8.0.0

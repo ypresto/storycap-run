@@ -102,15 +102,23 @@ export async function run(options: CliOptions): Promise<void> {
       `      project.test.browser.commands.resolveScreenshotFilepath = resolveScreenshotFilepath;`,
     );
   }
+  if (options.viewport) {
+    configLines.push(
+      `      project.test.browser.viewport = { width: ${options.viewport.width}, height: ${options.viewport.height} };`,
+      `      if (project.test.browser.instances) {`,
+      `        for (const instance of project.test.browser.instances) {`,
+      `          instance.viewport = { width: ${options.viewport.width}, height: ${options.viewport.height} };`,
+      `        }`,
+      `      }`,
+    );
+  }
   // Set deviceScaleFactor=2 for high-DPI screenshots.
   // Two incompatible provider APIs exist in vitest:
   //   1. Function-based: provider: playwright() from @vitest/browser-playwright
   //      → context options live in provider.options.contextOptions (the object returned by playwright())
   //   2. String-based: provider: 'playwright'
   //      → context options live in providerOptions.context (vitest config level)
-  // When `instances` is defined, it overrides top-level viewport, so we must patch per-instance too.
   configLines.push(
-    `      project.test.browser.viewport = { width: ${options.viewport.width}, height: ${options.viewport.height} };`,
     `      const provider = project.test.browser.provider;`,
     `      if (typeof provider === 'object' && provider !== null && 'options' in provider) {`,
     `        if (!provider.options.contextOptions) provider.options.contextOptions = {};`,
@@ -119,11 +127,6 @@ export async function run(options: CliOptions): Promise<void> {
     `        if (!project.test.browser.providerOptions) project.test.browser.providerOptions = {};`,
     `        if (!project.test.browser.providerOptions.context) project.test.browser.providerOptions.context = {};`,
     `        project.test.browser.providerOptions.context.deviceScaleFactor = 2;`,
-    `      }`,
-    `      if (project.test.browser.instances) {`,
-    `        for (const instance of project.test.browser.instances) {`,
-    `          instance.viewport = { width: ${options.viewport.width}, height: ${options.viewport.height} };`,
-    `        }`,
     `      }`,
   );
   if (options.headed) {

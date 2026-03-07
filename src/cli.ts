@@ -19,7 +19,7 @@ export type CliOptions = {
   testNamePattern: string | undefined;
   exclude: string[];
   outDir: string;
-  viewport: Viewport;
+  viewport: Viewport | undefined;
   project: string | undefined;
   dryRun: boolean;
   headed: boolean;
@@ -34,7 +34,7 @@ export function setupCli(argv: string[]): void {
     .option('-t, --testNamePattern <pattern>', 'Regex pattern to filter test names (combine with file filters for speed)')
     .option('--exclude <glob>', 'Exclude files matching glob pattern', { type: [] })
     .option('-o, --outDir <dir>', 'Output directory', { default: '__screenshots__' })
-    .option('--viewport <size>', 'Viewport size as WIDTHxHEIGHT (e.g. "1280x800")', { default: '1280x800' })
+    .option('--viewport <size>', 'Override viewport size as WIDTHxHEIGHT (e.g. "1280x800")')
     .option('--project <name>', 'Vitest project name to run (e.g. "storybook")')
     .option('--dryRun', 'List matched stories without capturing', { default: false })
     .option('--headed', 'Run browser in headed mode', { default: false })
@@ -45,7 +45,7 @@ export function setupCli(argv: string[]): void {
         testNamePattern: options.testNamePattern,
         exclude: options.exclude ?? [],
         outDir: options.outDir,
-        viewport: parseViewport(options.viewport),
+        viewport: options.viewport ? parseViewport(options.viewport) : undefined,
         project: options.project,
         dryRun: options.dryRun,
         headed: options.headed,

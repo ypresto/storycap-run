@@ -10,7 +10,7 @@ Runs [vitest](https://vitest.dev/) with [@storybook/addon-vitest](https://storyb
 
 - **Vitest `toMatchScreenshot`** — assertion-based, requires adding code to each story manually
 - **Chromatic** — powerful visual regression service, but requires an external paid service
-- **storycap (CLI)** — captures screenshots from a running Storybook server URL, but requires a separate server process
+- **storycap (CLI)** — captures screenshots from a running Storybook server URL, but requires starting a Storybook dev server first (two-step process)
 
 storycap-run automatically captures screenshots for **all stories** with zero per-story setup. It reuses your existing `@storybook/addon-vitest` config — no separate Storybook server needed.
 

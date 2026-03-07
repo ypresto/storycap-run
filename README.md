@@ -14,6 +14,8 @@ Runs [vitest](https://vitest.dev/) with [@storybook/addon-vitest](https://storyb
 
 storycap-run automatically captures screenshots for **all stories** with zero per-story setup. It reuses your existing `@storybook/addon-vitest` config — no separate Storybook server needed.
 
+This is especially useful for **AI coding agents** — a single command produces screenshots of all components, giving the agent visual context without any manual interaction.
+
 ## Prerequisites
 
 Your project must have `@storybook/addon-vitest` configured in `vitest.config.ts`:

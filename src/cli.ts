@@ -30,7 +30,7 @@ export function setupCli(argv: string[]): void {
   const cli = cac('storycap-run');
 
   cli
-    .command('[...filters]', 'Capture Storybook screenshots via storycap-testrun')
+    .command('[...filters]', 'Capture Storybook screenshots via storycap-testrun\n  Screenshots are taken even when tests fail.')
     .option('-t, --testNamePattern <pattern>', 'Regex pattern to filter test names (combine with file filters for speed)')
     .option('--exclude <glob>', 'Exclude files matching glob pattern', { type: [] })
     .option('-o, --outDir <dir>', 'Output directory', { default: '__screenshots__' })
